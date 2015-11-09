@@ -1,7 +1,4 @@
-import requests, bs4, click, __future__, sys, urllib2
-from pprint import pprint
-
-all_colors = 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'
+import requests, bs4, click, __future__
 
 base_link = 'https://kat.cr/usearch/'
 
@@ -17,9 +14,23 @@ sorder_filter = ('asc', 'desc')
 
 category_filter = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
 
+def colors():
+  enums = dict(
+    COUNT   = 'white',
+    NAME    = 'yellow',
+    SEED    = 'green',
+    LEECH   = 'red',
+    SIZE    = 'cyan',
+    AGE     = 'blue'
+  )
+  return type('Enum', (), enums)
+
+def cap(s, l):
+    return s if len(s)<=l else s[0:l-3]+'...'
+
+
 def get_data(**args):
-    search = raw_input("Search For: ")
-    #search = args.get('search', '')
+    search = args.get('search', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
@@ -47,13 +58,27 @@ def get_data(**args):
 
     return data
 
+def print_data(data):
+    count = 0
 
-def download(url):
-    rq = urllib2.Request(url)
-    res = urllib2.urlopen(rq)
-    f = open( (url.split(']'))[1] , 'w')
-    f.write(res.read())
-    f.close()
+    click.secho("%-3s  %-60s    %-20s    %-20s    %s  " % ("#", "NAME", "AGE", "SIZE", "SEEDS"), bold=True, fg="white", reverse=True)
+
+    for torrent in data:
+        count += 1
+        name = torrent['name']
+        age = torrent['age']
+        size = torrent['size']
+        seed = torrent['seed']
+        leech = torrent['leech']
+
+        click.secho("%-3s" % str(count), nl=False, fg=colors().COUNT, bold=True)
+        click.secho('  %-60s' % cap(name, 60), nl=False, fg=colors().NAME)
+        click.secho('    %-20s' % age, nl=False, fg=colors().AGE)
+        click.secho('    %-20s' % size, nl=False, fg=colors().SIZE)
+        click.secho('    %s' % seed, nl=False, fg=colors().SEED)
+        click.secho(' / ' , nl=False)
+        click.secho('%s' % leech, fg=colors().LEECH)
+
 
 @click.command()
 @click.option('-c', '--cat', 'category', default='all', help='Torrent Category')
@@ -61,20 +86,12 @@ def download(url):
 @click.option('-s', '--sort', 'sorder', default='desc', help='Select Sorting Order')
 @click.option('-p', '--page', 'page', default='1', help='Page')
 def main(category, field, sorder, page):
-    '''
-        Let's search a torrent
-    '''
-
-    data = get_data(category=category, field=field, sorder=sorder, page=page)
-    sys.stdout.flush()
-    pprint(data)
-
-    #download(data[0]['link'])
+    click.secho("Search For: ", nl=False, fg='white', bold=True)
+    search = raw_input()
+    try:
+        data = get_data(search=search, category=category, field=field, sorder=sorder, page=page)
+        print_data(data)
+    except:
+        print("Error connecting to inrernet")
 
 if __name__ == "__main__": main()
-
-# click.echo(click.style('I am colored %s' % color, fg=color))
-# click.echo(click.style('I am colored %s and bold' % color, fg=color, bold=True))
-# click.echo(click.style('I am reverse colored %s' % color, fg=color, reverse=True))
-# click.echo(click.style('I am blinking', blink=True))
-# click.echo(click.style('I am underlined', underline=True))
