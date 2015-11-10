@@ -7,7 +7,7 @@ setup(
     license='MIT',
     author='Udit Vasu',
     author_email='admin@codenirvana.in',
-    url='https://github.com/codenirvana/pyKAT',
+    url='https://github.com/codenirvana/kTorrent',
     packages=['ktorrent'],
     install_requires=[
         "beautifulsoup4==4.4.1",
