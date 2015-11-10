@@ -1,4 +1,4 @@
-import requests, json, codecs, __future__
+import requests, json, __future__
 from bs4 import BeautifulSoup
 
 BASE_LINK = 'https://kat.cr/usearch/'
@@ -15,7 +15,7 @@ FIELD_FILTER = {
 SORDER_FILTER = ['asc', 'desc']
 CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
 
-def get(**args):
+def search(**args):
     search = args.get('search', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')

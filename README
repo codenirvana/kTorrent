@@ -1,5 +1,5 @@
 =====
-pyKAT
+kTorrent
 =====
 
 A Python module to fetch and parse data from Kickass Torrents.
@@ -9,11 +9,11 @@ Installation
 
 Install using pip:
 
-    pip install pykat
+    pip install ktorrent
 
 Usage
 =====
 
-    import pykat
+    import ktorrent
 
-    tor_search = pykat.get (search='Linux')
+    tor_search = ktorrent.search(search='Linux')

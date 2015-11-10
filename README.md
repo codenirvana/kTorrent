@@ -1,17 +1,17 @@
-# pyKAT
+# kTorrent
 
 A Python module to fetch and parse data from Kickass Torrents.
 
 ## Installation
 
-    pip install horoscope
+    pip install ktorrent
 
 ## Usage
 
 ```python
 
-import pykat
+import ktorrent
 
-tor_search = pykat.get (search='Linux')
+tor_search = ktorrent.search(search='Linux')
 
 ```

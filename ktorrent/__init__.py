@@ -1,0 +1,1 @@
+from .ktorrent import search
