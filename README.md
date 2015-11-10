@@ -1,4 +1,4 @@
-# kTorrent
+# kTorrent [![Build Status](https://travis-ci.org/codenirvana/kTorrent.svg)](https://travis-ci.org/codenirvana/kTorrent)
 
 A Python module to fetch and parse data from Kickass Torrents.
 
