@@ -1,8 +1,12 @@
 from unittest import TestCase
 
-import ktorrent, json
+import ktorrent
 
-class TestSearch(TestCase):
-    def test_valid_json(self):
-        s = ktorrent.search(search='linux')
-        self.assertTrue( json.loads(s) )
+class FailureMessageTest(TestCase):
+
+    def testFail(self):
+        output = ktorrent.search(search='linux')
+        self.failIfEqual(output,"Couldn't retrieve data.")
+
+if __name__ == '__main__':
+    unittest.main()
