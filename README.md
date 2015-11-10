@@ -46,26 +46,16 @@ search = ktorrent.search(search='linux', category='books', field='age', sorder='
 > All Parameters in String; No Order; Required: search
 
 ##### Valid Parameters Values
-**category**
-- all
-- movies
-- tv
-- anime
-- music
-- books
-- applications
-- xxx
-
-**field**
-- size
-- files
-- age
-- seed
-- leech
-
-**sorder**
-- asc
-- desc
+category     | field | sorder
+------------ | ----- | ------
+all          | size  |  asc
+movies       | files |  desc
+tv           | age   |
+anime        | seed  |
+music        | leech |
+books        |
+applications |
+xxx          |
 
 Output
 ====
