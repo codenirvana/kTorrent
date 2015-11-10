@@ -33,16 +33,15 @@ import ktorrent
 search = ktorrent.search(search='Linux')
 
 # Complex Search
-search = torrent.search(search='linux', category='books', field='age', sorder='desc')
-
+search = ktorrent.search(search='linux', category='books', field='age', sorder='desc')
 ```
 
 ##### Function Parameters
-- search = 'search query'
-- category = 'torrent category'
-- field = 'select field to sort results'
-- sorder = 'sorting order'
-- page = 'page number'
+- **search** = 'search query'
+- **category** = 'torrent category'
+- **field** = 'select field to sort results'
+- **sorder** = 'sorting order'
+- **page** = 'page number'
 
 > All Parameters in String; No Order; Required: search
 
@@ -89,17 +88,6 @@ Output
     ]
 }
 ```
-
-Torrent Information Available
-====
-- name
-- category
-- size
-- files
-- age
-- seed
-- leech
-- link
 
 Todo
 ====
