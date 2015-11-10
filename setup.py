@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ktorrent',
-    version='0.1.0',
+    version='0.1.5',
     description='Fetches and parses data from Kickass Torrents.',
     license='MIT',
     author='Udit Vasu',
@@ -12,6 +12,24 @@ setup(
     install_requires=[
         "beautifulsoup4==4.4.1",
         "requests==2.8.1"
+    ],
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Topic :: Internet',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities',
     ],
     test_suite='nose.collector',
     tests_require=['nose']

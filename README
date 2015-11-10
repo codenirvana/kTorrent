@@ -21,3 +21,5 @@ Usage
 
     # Complex Search
     search = ktorrent.search(search='linux', category='books', field='age', sorder='desc')
+
+More @ https://github.com/codenirvana/kTorrent
