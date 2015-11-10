@@ -111,4 +111,4 @@ Todo
 
 Licence
 ====
-Open sourced under [MIT License](License.txt)
+Open sourced under [MIT License](LICENSE)
