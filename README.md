@@ -83,8 +83,9 @@ Output
 
 Todo
 ====
+- [ ] Document Code
 - [ ] Add number of pages
-- [ ] Check if torrent varified or not
+- [ ] Check if torrent verified or not
 - [ ] Verify function parameters
 - [ ] Download functionality
 
