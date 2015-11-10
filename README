@@ -1,0 +1,19 @@
+=====
+pyKAT
+=====
+
+A Python module to fetch and parse data from Kickass Torrents.
+
+Installation
+============
+
+Install using pip:
+
+    pip install pykat
+
+Usage
+=====
+
+    import pykat
+
+    tor_search = pykat.get (search='Linux')
