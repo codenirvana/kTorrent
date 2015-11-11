@@ -25,9 +25,8 @@ SORDER_FILTER = ['asc', 'desc']
 CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
 
 def search(**args):
-'''
-Do a search
-'''
+#Do a search
+
     search = args.get('search', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
