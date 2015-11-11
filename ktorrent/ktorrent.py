@@ -1,10 +1,15 @@
 import requests, json, __future__
 from bs4 import BeautifulSoup
 
+# Base search link
 BASE_LINK = 'https://kat.cr/usearch/'
 
+# Error Message if requests method fails to get content
 ERROR_MESSAGE = "Couldn't retrieve data."
 
+### Filters to verify passed parameters
+
+# KAT search result fields
 FIELD_FILTER = {
     'size'  : 'size',
     'files' : 'files_count',
@@ -12,10 +17,17 @@ FIELD_FILTER = {
     'seed'  : 'seeders',
     'leech' : 'leechers'
 }
+
+# Sorting order
 SORDER_FILTER = ['asc', 'desc']
+
+# Categories
 CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
 
 def search(**args):
+'''
+Do a search
+'''
     search = args.get('search', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
