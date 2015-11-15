@@ -75,7 +75,8 @@ Output
          "age"      : "",
          "seed"     : "",
          "leech"    : "",
-         "link"     : ""
+         "link"     : "",
+         "magnet"   : ""
       }
     ]
 }

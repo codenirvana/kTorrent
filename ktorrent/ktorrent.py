@@ -33,7 +33,7 @@ def search(**args):
     sorder = args.get('sorder', 'desc')
     page = args.get('page', '1')
 
-    dict_keys = ['name', 'link', 'category', 'size', 'files', 'age', 'seed', 'leech']
+    dict_keys = ['name', 'link', 'magnet', 'category', 'size', 'files', 'age', 'seed', 'leech']
 
     search_query = search + ' category:' + category
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
@@ -50,9 +50,9 @@ def search(**args):
     for row in rows:
         cols = row.find_all('td')
         name = cols[0].select('.cellMainLink')
-        link = cols[0].select('.iaconbox a')
+        links = cols[0].select('.iaconbox a')
         category = cols[0].select('[id^=cat_]')
-        row_data = [ name[0].text, 'http:' + link[-1].get('href'), category[0].text]
+        row_data = [ name[0].text, 'http:' + links[-1].get('href'), links[-2].get('href'), category[0].text]
         for i in range(1,6):
             row_data.append(cols[i].text.strip())
         result.append( dict(zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )) )
