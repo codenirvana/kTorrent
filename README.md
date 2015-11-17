@@ -36,7 +36,7 @@ import ktorrent
 search = ktorrent.search(search='Linux')
 
 # Complex Search
-search = ktorrent.search(search='linux', category='books', field='age', sorder='desc')
+search = ktorrent.search(search='linux', category='books', field='age', sorder='desc', page='2')
 ```
 
 ##### Function Parameters
