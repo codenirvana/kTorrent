@@ -69,15 +69,16 @@ Output
 {  
    "torrent":[  
       {  
-         "name"     : "",
-         "category" : "",
-         "size"     : "",
-         "files"    : "",
          "age"      : "",
-         "seed"     : "",
+         "category" : "",
+         "files"    : "",
          "leech"    : "",
          "link"     : "",
-         "magnet"   : ""
+         "magnet"   : "",
+         "name"     : "",
+         "seed"     : "",
+         "size"     : "",
+         "verified" : ""
       }
     ]
 }
@@ -87,7 +88,6 @@ Todo
 ====
 - [ ] Document Code
 - [ ] Add number of pages
-- [ ] Check if torrent verified or not
 - [ ] Verify function parameters
 - [ ] Download functionality
 
