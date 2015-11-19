@@ -33,7 +33,7 @@ def search(**args):
     sorder = args.get('sorder', 'desc')
     page = args.get('page', '1')
 
-    dict_keys = ['name', 'link', 'magnet', 'category', 'size', 'files', 'age', 'seed', 'leech']
+    dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
 
     search_query = search + ' category:' + category
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
@@ -56,8 +56,13 @@ def search(**args):
         link = 'http:' + links[-1].get('href')
         magnet = links[-2].get('href')
         category = ( cols[0].select('[id^=cat_]') )[0].text
+        # Check if verified
+        verified = '0'    # False
+        if len(links) > 3:
+            if links[-4].get('title') == "Verified Torrent":
+                verified = '1'
 
-        row_data = [ name, link, magnet, category ]
+        row_data = [ name, link, magnet, verified, category ]
 
         for i in range(1,6):
             row_data.append(cols[i].text.strip())
