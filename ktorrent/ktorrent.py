@@ -49,16 +49,27 @@ def search(**args):
     result = []
     for row in rows:
         cols = row.find_all('td')
-        name = cols[0].select('.cellMainLink')
-        links = cols[0].select('.iaconbox a')
-        category = cols[0].select('[id^=cat_]')
-        row_data = [ name[0].text, 'http:' + links[-1].get('href'), links[-2].get('href'), category[0].text]
+        links = cols[0].select('.iaconbox a')   # All related links
+
+        # Extracting Torrent information
+        name = ( cols[0].select('.cellMainLink') )[0].text
+        link = 'http:' + links[-1].get('href')
+        magnet = links[-2].get('href')
+        category = ( cols[0].select('[id^=cat_]') )[0].text
+
+        row_data = [ name, link, magnet, category ]
+
         for i in range(1,6):
             row_data.append(cols[i].text.strip())
-        result.append( dict(zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )) )
+
+        # Zip keys with values
+        row_data = zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )
+
+        # Append current torrent to results
+        result.append( dict( row_data ) )
 
     data = {
         'torrent' : result
     }
 
-    return json.dumps(data)
+    return json.dumps(data,sort_keys=True)
