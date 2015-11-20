@@ -73,8 +73,16 @@ def search(**args):
         # Append current torrent to results
         result.append( dict( row_data ) )
 
+    # Calculate total pages
+    pager =  soup.select('.pages a')
+    total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
+
     data = {
-        'torrent' : result
+        'torrent' : result,
+        'pages' : {
+            'current' : int( page ),
+            'total'   : total_pages
+        }
     }
 
     return json.dumps(data,sort_keys=True)

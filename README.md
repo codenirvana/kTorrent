@@ -67,6 +67,10 @@ Output
 
 ```json
 {  
+   "pages":{  
+      "current" : 1,
+      "total"   : 10
+   },
    "torrent":[  
       {  
          "age"      : "",
@@ -87,7 +91,6 @@ Output
 Todo
 ====
 - [ ] Document Code
-- [ ] Add number of pages
 - [ ] Verify function parameters
 - [ ] Download functionality
 
