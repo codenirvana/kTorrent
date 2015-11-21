@@ -67,9 +67,10 @@ Output
 
 ```json
 {  
-   "pages":{  
-      "current" : 1,
-      "total"   : 10
+   "info":{  
+      "pageCurrent" : 1,
+      "pageResult"  : 25,
+      "pageTotal"   : 10
    },
    "torrent":[  
       {  

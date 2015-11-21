@@ -81,8 +81,9 @@ def search(**args):
 
         data = {
             'info' : {
-                'currentPage' : int( page ),
-                'totalPages'  : total_pages
+                'pageCurrent' : int( page ),
+                'pageResult'  : rows_found,
+                'pageTotal'   : total_pages
             },
             'torrent' : result
         }
