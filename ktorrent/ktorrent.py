@@ -78,11 +78,11 @@ def search(**args):
     total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
 
     data = {
-        'torrent' : result,
-        'pages' : {
-            'current' : int( page ),
-            'total'   : total_pages
-        }
+        'info' : {
+            'currentPage' : int( page ),
+            'totalPages'  : total_pages
+        },
+        'torrent' : result
     }
 
     return json.dumps(data,sort_keys=True)
