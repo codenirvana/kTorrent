@@ -45,44 +45,48 @@ def search(**args):
 
     soup = BeautifulSoup(response.text,"html.parser")
     rows = soup.select('[id^=torrent_]')
+    rows_found = len( rows )
 
-    result = []
-    for row in rows:
-        cols = row.find_all('td')
-        links = cols[0].select('.iaconbox a')   # All related links
+    if rows_found > 0:
+        result = []
+        for row in rows:
+            cols = row.find_all('td')
+            links = cols[0].select('.iaconbox a')   # All related links
 
-        # Extracting Torrent information
-        name = ( cols[0].select('.cellMainLink') )[0].text
-        link = 'http:' + links[-1].get('href')
-        magnet = links[-2].get('href')
-        category = ( cols[0].select('[id^=cat_]') )[0].text
-        # Check if verified
-        verified = '0'    # False
-        if len(links) > 3:
-            if links[-4].get('title') == "Verified Torrent":
-                verified = '1'
+            # Extracting Torrent information
+            name = ( cols[0].select('.cellMainLink') )[0].text
+            link = 'http:' + links[-1].get('href')
+            magnet = links[-2].get('href')
+            category = ( cols[0].select('[id^=cat_]') )[0].text
+            # Check if verified
+            verified = '0'    # False
+            if len(links) > 3:
+                if links[-4].get('title') == "Verified Torrent":
+                    verified = '1'
 
-        row_data = [ name, link, magnet, verified, category ]
+            row_data = [ name, link, magnet, verified, category ]
 
-        for i in range(1,6):
-            row_data.append(cols[i].text.strip())
+            for i in range(1,6):
+                row_data.append(cols[i].text.strip())
 
-        # Zip keys with values
-        row_data = zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )
+            # Zip keys with values
+            row_data = zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )
 
-        # Append current torrent to results
-        result.append( dict( row_data ) )
+            # Append current torrent to results
+            result.append( dict( row_data ) )
 
-    # Calculate total pages
-    pager =  soup.select('.pages a')
-    total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
+        # Calculate total pages
+        pager =  soup.select('.pages a')
+        total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
 
-    data = {
-        'info' : {
-            'currentPage' : int( page ),
-            'totalPages'  : total_pages
-        },
-        'torrent' : result
-    }
+        data = {
+            'info' : {
+                'currentPage' : int( page ),
+                'totalPages'  : total_pages
+            },
+            'torrent' : result
+        }
+    else:
+        data = "Nothing found!"
 
     return json.dumps(data,sort_keys=True)
