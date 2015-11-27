@@ -89,13 +89,6 @@ Output
 }
 ```
 
-Todo
-====
-- [ ] Document Code
-- [ ] Verify function parameters
-- [ ] Download functionality
-
-
 Licence
 ====
 Open sourced under [MIT License](LICENSE)
