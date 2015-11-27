@@ -19,8 +19,8 @@ $ pip install ktorrent
 ### Build from source
 
 ```bash
-$ git clone git@github.com:codenirvana/ktorrent.git
-$ cd ktorrent
+$ git clone https://github.com/codenirvana/kTorrent.git
+$ cd kTorrent
 $ python setup.py install
 ```
 
