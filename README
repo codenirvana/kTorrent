@@ -1,25 +1,30 @@
-=====
+========
 kTorrent
-=====
+========
 
 A Python module to fetch and parse data from Kickass Torrents.
 
 Install
-=====
+-------
 
-Install using pip:
+::
 
     pip install ktorrent
 
 Usage
-=====
-    ### Search
+-----
+
+::
+
     import ktorrent
 
     # Basic Search
     search = ktorrent.search(search='Linux')
 
     # Complex Search
-    search = ktorrent.search(search='linux', category='books', field='age', sorder='desc')
+    search = ktorrent.search(search='linux', category='books', field='age', sorder='desc', page='2')
 
-More @ https://github.com/codenirvana/kTorrent
+Know More
+--------
+
+`kTorrent Docs <https://github.com/codenirvana/kTorrent#readme>`_
