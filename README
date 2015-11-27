@@ -7,14 +7,10 @@ A Python module to fetch and parse data from Kickass Torrents.
 Install
 -------
 
-::
-
     pip install ktorrent
 
 Usage
 -----
-
-::
 
     import ktorrent
 
@@ -27,4 +23,4 @@ Usage
 Know More
 --------
 
-`kTorrent Docs <https://github.com/codenirvana/kTorrent#readme>`_
+kTorrent Docs: https://github.com/codenirvana/kTorrent#readme
