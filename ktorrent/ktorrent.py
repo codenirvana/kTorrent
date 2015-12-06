@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 BASE_LINK = 'https://kat.cr/usearch/'
 
 # Error Message if requests method fails to get content
-ERROR_MESSAGE = "Couldn't retrieve data."
+ERROR_MESSAGE = "Couldn't retrieve data"
 
 ### Filters to verify passed parameters
 
@@ -88,6 +88,6 @@ def search(**args):
             'torrent' : result
         }
     else:
-        data = "Nothing found!"
+        data = "Nothing found"
 
     return json.dumps(data,sort_keys=True)

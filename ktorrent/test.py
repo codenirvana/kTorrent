@@ -7,7 +7,7 @@ class kTorrentTest(TestCase):
     def testConnection(self):
         # Check connection
         output = ktorrent.search(search='linux')
-        self.failIfEqual(output,"Couldn't retrieve data.")
+        self.failIfEqual(output,"Couldn't retrieve data")
 
     def testOutput(self):
         # Validate JSON
