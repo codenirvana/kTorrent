@@ -4,6 +4,7 @@ kTorrent
 [![version](https://img.shields.io/pypi/v/ktorrent.svg)](https://pypi.python.org/pypi/ktorrent/)
 [![supported](https://img.shields.io/pypi/pyversions/ktorrent.svg)](https://pypi.python.org/pypi/ktorrent/)
 [![Build Status](https://travis-ci.org/codenirvana/kTorrent.svg)](https://travis-ci.org/codenirvana/kTorrent)
+[![Coverage Status](https://coveralls.io/repos/codenirvana/kTorrent/badge.svg?branch=master&service=github)](https://coveralls.io/github/codenirvana/kTorrent?branch=master)
 
 A Python module to fetch and parse data from Kickass Torrents.
 
