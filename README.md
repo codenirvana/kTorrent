@@ -89,6 +89,15 @@ Output
 }
 ```
 
+ToDo
+====
+- [ ] Strict Search
+- [ ] Fuzzy Search
+- [ ] Subtract Words
+- [ ] Certain Uploader
+- [ ] Safety Filter
+- [ ] Only Verified Torrents
+
 Licence
 ====
 Open sourced under [MIT License](LICENSE)
