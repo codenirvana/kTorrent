@@ -43,6 +43,7 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
 - **search**    = 'search query'
 - **strict**    = 'search strictness'
 - **safe**      = 'family safety filter'
+- **verified**  = 'only verified torrents'
 - **category**  = 'torrent category'
 - **field**     = 'select field to sort results'
 - **sorder**    = 'sorting order'
@@ -97,8 +98,8 @@ ToDo
 - [x] Fuzzy Search
 - [ ] Subtract Words
 - [ ] Certain Uploader
-- [ ] Safety Filter
-- [ ] Only Verified Torrents
+- [x] Safety Filter
+- [x] Only Verified Torrents
 
 Licence
 ====

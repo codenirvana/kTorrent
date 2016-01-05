@@ -30,6 +30,7 @@ def search(**args):
     search = args.get('search', '')
     strict = args.get('strict', '0')
     safe = args.get('safe', '0')
+    verified = args.get('verified', '0')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
@@ -52,6 +53,10 @@ def search(**args):
     # Safety
     if safe == '1':
         search_query = search_query + ' is_safe:1'
+
+    # Verified
+    if verified == '1':
+        search_query = search_query + ' verified:1'
 
     ### Generate Final Link ###
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
