@@ -52,16 +52,27 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
 > All Parameters in String; No Order; Required: search
 
 ##### Valid Parameters Values
-category     | field | sorder | strict
------------- | ----- | ------ | ------
-all          | size  |  asc   | -1 *(fuzzy)*
-movies       | files |  desc  | 1  *(strict)*
-tv           | age   |
-anime        | seed  |
-music        | leech |
-books        |
-applications |
-xxx          |
+
+* Search Result Ordering
+
+   category     | field | sorder
+   ------------ | ----- | ------
+   all          | size  |  asc
+   movies       | files |  desc
+   tv           | age   |
+   anime        | seed  |
+   music        | leech |
+   books        |
+   applications |
+   xxx          |
+
+* Search Filters
+
+   *value* | strict | safe | verified
+   ------- | ------ | ---- | --------
+      -1   | fuzzy  |  no  |    no
+      0    | normal |  no  |    no
+      1    | strict | yes  |    yes
 
 Output
 ====
