@@ -29,6 +29,7 @@ def search(**args):
 
     search = args.get('search', '')
     strict = args.get('strict', '0')
+    safe = args.get('safe', '0')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
@@ -36,6 +37,8 @@ def search(**args):
 
     dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
 
+    ### Generate Search Query ###
+    # Strictness
     if strict == '-1':
         search_query = search.replace(" ", " OR ")
     elif strict == '1':
@@ -43,8 +46,14 @@ def search(**args):
     else:
         search_query = search
 
+    # Category
     search_query = search_query + ' category:' + category
 
+    # Safety
+    if safe == '1':
+        search_query = search_query + ' is_safe:1'
+
+    ### Generate Final Link ###
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
 
     try:

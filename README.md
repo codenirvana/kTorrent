@@ -40,12 +40,13 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
 ```
 
 ##### Function Parameters
-- **search** = 'search query'
-- **strict** = 'search strictness'
-- **category** = 'torrent category'
-- **field** = 'select field to sort results'
-- **sorder** = 'sorting order'
-- **page** = 'page number'
+- **search**    = 'search query'
+- **strict**    = 'search strictness'
+- **safe**      = 'family safety filter'
+- **category**  = 'torrent category'
+- **field**     = 'select field to sort results'
+- **sorder**    = 'sorting order'
+- **page**      = 'page number'
 
 > All Parameters in String; No Order; Required: search
 
