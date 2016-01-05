@@ -36,11 +36,12 @@ import ktorrent
 search = ktorrent.search(search='Linux')
 
 # Complex Search
-search = ktorrent.search(search='linux', category='books', field='age', sorder='desc', page='2')
+search = ktorrent.search(search='Linux Shell script', strict='1', category='books', field='age', sorder='desc', page='2')
 ```
 
 ##### Function Parameters
 - **search** = 'search query'
+- **strict** = 'search strictness'
 - **category** = 'torrent category'
 - **field** = 'select field to sort results'
 - **sorder** = 'sorting order'
@@ -49,10 +50,10 @@ search = ktorrent.search(search='linux', category='books', field='age', sorder='
 > All Parameters in String; No Order; Required: search
 
 ##### Valid Parameters Values
-category     | field | sorder
------------- | ----- | ------
-all          | size  |  asc
-movies       | files |  desc
+category     | field | sorder | strict
+------------ | ----- | ------ | ------
+all          | size  |  asc   | -1 *(fuzzy)*
+movies       | files |  desc  | 1  *(strict)*
 tv           | age   |
 anime        | seed  |
 music        | leech |
@@ -91,8 +92,8 @@ Output
 
 ToDo
 ====
-- [ ] Strict Search
-- [ ] Fuzzy Search
+- [x] Strict Search
+- [x] Fuzzy Search
 - [ ] Subtract Words
 - [ ] Certain Uploader
 - [ ] Safety Filter
