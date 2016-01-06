@@ -31,6 +31,7 @@ def search(**args):
     strict = args.get('strict', '0')
     safe = args.get('safe', '0')
     verified = args.get('verified', '0')
+    subtract = args.get('subtract', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
@@ -57,6 +58,12 @@ def search(**args):
     # Verified
     if verified == '1':
         search_query = search_query + ' verified:1'
+
+    # Subtract specified word(s)
+    if subtract != '':
+        words = subtract.split()
+        for word in words:
+            search_query = search_query + ' -' + word
 
     ### Generate Final Link ###
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
