@@ -32,6 +32,7 @@ def search(**args):
     safe = args.get('safe', '0')
     verified = args.get('verified', '0')
     subtract = args.get('subtract', '')
+    user = args.get('user', '')
     category = args.get('category', 'all')
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
@@ -64,6 +65,10 @@ def search(**args):
         words = subtract.split()
         for word in words:
             search_query = search_query + ' -' + word
+
+    # Uploads by certain user
+    if user != '':
+        search_query = search_query + ' user:' + user
 
     ### Generate Final Link ###
     link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
