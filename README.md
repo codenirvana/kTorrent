@@ -111,12 +111,7 @@ Output
 
 ToDo
 ====
-- [x] Strict Search
-- [x] Fuzzy Search
-- [x] Subtract Words
-- [x] Certain Uploader
-- [x] Safety Filter
-- [x] Only Verified Torrents
+- [ ] Top torrents category wise
 
 Licence
 ====
