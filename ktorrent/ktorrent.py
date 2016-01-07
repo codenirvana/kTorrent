@@ -24,57 +24,14 @@ SORDER_FILTER = ['asc', 'desc']
 # Categories
 CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
 
-def search(**args):
-#Do a search
+# Dictionary keys
+dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
 
-    search = args.get('search', '')
-    strict = args.get('strict', '0')
-    safe = args.get('safe', '0')
-    verified = args.get('verified', '0')
-    subtract = args.get('subtract', '')
-    user = args.get('user', '')
-    category = args.get('category', 'all')
-    field = args.get('field', 'age')
-    sorder = args.get('sorder', 'desc')
-    page = args.get('page', '1')
-
-    dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
-
-    ### Generate Search Query ###
-    # Strictness
-    if strict == '-1':
-        search_query = search.replace(" ", " OR ")
-    elif strict == '1':
-        search_query = '"' + search + '"'
-    else:
-        search_query = search
-
-    # Category
-    search_query = search_query + ' category:' + category
-
-    # Safety
-    if safe == '1':
-        search_query = search_query + ' is_safe:1'
-
-    # Verified
-    if verified == '1':
-        search_query = search_query + ' verified:1'
-
-    # Subtract specified word(s)
-    if subtract != '':
-        words = subtract.split()
-        for word in words:
-            search_query = search_query + ' -' + word
-
-    # Uploads by certain user
-    if user != '':
-        search_query = search_query + ' user:' + user
-
-    ### Generate Final Link ###
-    link = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
+def request(url):
+# generate request result
 
     try:
-        response = requests.get(link)
+        response = requests.get(url)
     except:
         return ERROR_MESSAGE
 
@@ -114,6 +71,13 @@ def search(**args):
         pager =  soup.select('.pages a')
         total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
 
+        # find page number
+        page = url.split('/')
+        if page[-1].isdigit():
+            page = page[-1]
+        else:
+            page = page[-2]
+
         data = {
             'info' : {
                 'pageCurrent' : int( page ),
@@ -126,3 +90,54 @@ def search(**args):
         data = "Nothing found"
 
     return json.dumps(data,sort_keys=True)
+
+def search(**args):
+# Do a search
+
+    search = args.get('search', '')
+    strict = args.get('strict', '0')
+    safe = args.get('safe', '0')
+    verified = args.get('verified', '0')
+    subtract = args.get('subtract', '')
+    user = args.get('user', '')
+    category = args.get('category', 'all')
+    field = args.get('field', 'age')
+    sorder = args.get('sorder', 'desc')
+    page = args.get('page', '1')
+
+    ### Generate Search Query ###
+    # Strictness
+    if strict == '-1':
+        search_query = search.replace(" ", " OR ")
+    elif strict == '1':
+        search_query = '"' + search + '"'
+    else:
+        search_query = search
+
+    # Category
+    search_query = search_query + ' category:' + category
+
+    # Safety
+    if safe == '1':
+        search_query = search_query + ' is_safe:1'
+
+    # Verified
+    if verified == '1':
+        search_query = search_query + ' verified:1'
+
+    # Subtract specified word(s)
+    if subtract != '':
+        words = subtract.split()
+        for word in words:
+            search_query = search_query + ' -' + word
+
+    # Uploads by certain user
+    if user != '':
+        search_query = search_query + ' user:' + user
+
+    ### Generate Final Link ###
+    url = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
+
+    return request(url)
+
+print(search(search='linux', page='2'))
