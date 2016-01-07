@@ -66,6 +66,8 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
    music        | leech |
    books        |
    applications |
+   games        |
+   other        |
    xxx          |
 
 * Search Filters
@@ -79,6 +81,42 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
 * **subtract** : Space separated, *... subtract='ebook reference'...*
 
 * **user** : Single user/uploader name
+
+
+### Top
+
+```python
+import ktorrent
+
+# Top books
+top_books = ktorrent.top(category='books')
+
+# Top movies
+top_movies = ktorrent.top(category='movies', page='2')
+```
+
+##### Function Parameters
+- **category**  = 'torrent category'
+- **page**      = 'page number'
+
+> All Parameters in String; No Order; Required: category
+
+##### Valid Parameters Values
+
+* Categories available
+
+   category     |
+   ------------ |
+   movies       |
+   tv           |
+   anime        |
+   music        |
+   books        |
+   applications |
+   games        |
+   other        |
+   xxx          |
+
 
 Output
 ====
@@ -111,7 +149,7 @@ Output
 
 ToDo
 ====
-- [ ] Top torrents category wise
+- [ ] Validate search function params
 
 Licence
 ====

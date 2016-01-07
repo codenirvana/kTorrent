@@ -2,10 +2,11 @@ import requests, json, __future__
 from bs4 import BeautifulSoup
 
 # Base search link
-BASE_LINK = 'https://kat.cr/usearch/'
+BASE_LINK = 'https://kat.cr/'
 
-# Error Message if requests method fails to get content
-ERROR_MESSAGE = "Couldn't retrieve data"
+# Error Messages
+EM_CONNECTION   = "Couldn't retrieve data"
+EM_INVALID      = "Invalid parameters passed"
 
 ### Filters to verify passed parameters
 
@@ -22,7 +23,7 @@ FIELD_FILTER = {
 SORDER_FILTER = ['asc', 'desc']
 
 # Categories
-CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'xxx']
+CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'games', 'other', 'xxx']
 
 # Dictionary keys
 dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
@@ -33,7 +34,7 @@ def request(url):
     try:
         response = requests.get(url)
     except:
-        return ERROR_MESSAGE
+        return EM_CONNECTION
 
     soup = BeautifulSoup(response.text,"html.parser")
     rows = soup.select('[id^=torrent_]')
@@ -91,6 +92,22 @@ def request(url):
 
     return json.dumps(data,sort_keys=True)
 
+def top(**args):
+# Top torrents category wise
+
+    category = args.get('category')
+    page = args.get('page', '1')
+
+    # invalid category or page found
+    if category not in CATEGORY_FILTER or category == 'all' or (not page.isdigit()):
+        return EM_INVALID
+
+    ### Generate Final Link ###
+    url = BASE_LINK + category + '/' + page
+
+    return request(url)
+
+
 def search(**args):
 # Do a search
 
@@ -104,6 +121,10 @@ def search(**args):
     field = args.get('field', 'age')
     sorder = args.get('sorder', 'desc')
     page = args.get('page', '1')
+
+    # no search query found
+    if search == '':
+        return EM_INVALID
 
     ### Generate Search Query ###
     # Strictness
@@ -136,8 +157,6 @@ def search(**args):
         search_query = search_query + ' user:' + user
 
     ### Generate Final Link ###
-    url = BASE_LINK + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
+    url = BASE_LINK + 'usearch/' + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
 
     return request(url)
-
-print(search(search='linux', page='2'))
