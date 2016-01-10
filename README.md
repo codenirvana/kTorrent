@@ -105,17 +105,7 @@ top_movies = ktorrent.top(category='movies', page='2')
 
 * Categories available
 
-   category     |
-   ------------ |
-   movies       |
-   tv           |
-   anime        |
-   music        |
-   books        |
-   applications |
-   games        |
-   other        |
-   xxx          |
+   movies, tv, anime, music, books, applications, games, other, xxx
 
 
 Output
