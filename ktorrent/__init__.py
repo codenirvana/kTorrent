@@ -1,2 +1,1 @@
-from .ktorrent import search
-from .ktorrent import top
+from .ktorrent import search, top
