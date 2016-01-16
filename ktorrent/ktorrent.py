@@ -136,25 +136,25 @@ def search(**args):
         search_query = search
 
     # Category
-    search_query = search_query + ' category:' + category
+    search_query += ' category:' + category
 
     # Safety
     if safe == '1':
-        search_query = search_query + ' is_safe:1'
+        search_query += ' is_safe:1'
 
     # Verified
     if verified == '1':
-        search_query = search_query + ' verified:1'
+        search_query += ' verified:1'
 
     # Subtract specified word(s)
     if subtract != '':
         words = subtract.split()
         for word in words:
-            search_query = search_query + ' -' + word
+            search_query += ' -' + word
 
     # Uploads by certain user
     if user != '':
-        search_query = search_query + ' user:' + user
+        search_query += ' user:' + user
 
     ### Generate Final Link ###
     url = BASE_LINK + 'usearch/' + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
