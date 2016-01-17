@@ -41,15 +41,15 @@ search = ktorrent.search(search='Linux Shell script', strict=1, category='books'
 
 ##### Function Parameters
 - **search**    = 'search query'
-- **strict**    = 'search strictness'     **[int]**
-- **safe**      = 'family safety filter'     **[int]**
-- **verified**  = 'only verified torrents'     **[int]**
+- **strict**    = 'search strictness' **[int]**
+- **safe**      = 'family safety filter' **[int]**
+- **verified**  = 'only verified torrents' **[int]**
 - **subtract**  = 'Subtract specified word(s)'
 - **user**      = 'Uploads by certain user'
 - **category**  = 'torrent category'
 - **field**     = 'select field to sort results'
 - **sorder**    = 'sorting order'
-- **page**      = 'page number'     **[int]**
+- **page**      = 'page number' **[int]**
 
 > Required: search
 
@@ -97,7 +97,7 @@ top_movies = ktorrent.top(category='movies', page=2)
 
 ##### Function Parameters
 - **category**  = 'torrent category'
-- **page**      = 'page number'
+- **page**      = 'page number' **[int]**
 
 > Required: category
 
