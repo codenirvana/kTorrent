@@ -36,22 +36,22 @@ import ktorrent
 search = ktorrent.search(search='Linux')
 
 # Complex Search
-search = ktorrent.search(search='Linux Shell script', strict='1', category='books', field='age', sorder='desc', page='2')
+search = ktorrent.search(search='Linux Shell script', strict=1, category='books', field='age', sorder='desc', page=2)
 ```
 
 ##### Function Parameters
 - **search**    = 'search query'
-- **strict**    = 'search strictness'
-- **safe**      = 'family safety filter'
-- **verified**  = 'only verified torrents'
+- **strict**    = 'search strictness'     **[int]**
+- **safe**      = 'family safety filter'     **[int]**
+- **verified**  = 'only verified torrents'     **[int]**
 - **subtract**  = 'Subtract specified word(s)'
 - **user**      = 'Uploads by certain user'
 - **category**  = 'torrent category'
 - **field**     = 'select field to sort results'
 - **sorder**    = 'sorting order'
-- **page**      = 'page number'
+- **page**      = 'page number'     **[int]**
 
-> All Parameters in String; No Order; Required: search
+> Required: search
 
 ##### Valid Parameters Values
 
@@ -78,7 +78,7 @@ search = ktorrent.search(search='Linux Shell script', strict='1', category='book
       0    | normal |   -  |    -
       1    | strict | yes  |   yes
 
-* **subtract** : Space separated, *... subtract='ebook reference'...*
+* **subtract** : Space separated, *... subtract='book reference'...*
 
 * **user** : Single user/uploader name
 
@@ -92,14 +92,14 @@ import ktorrent
 top_books = ktorrent.top(category='books')
 
 # Top movies
-top_movies = ktorrent.top(category='movies', page='2')
+top_movies = ktorrent.top(category='movies', page=2)
 ```
 
 ##### Function Parameters
 - **category**  = 'torrent category'
 - **page**      = 'page number'
 
-> All Parameters in String; No Order; Required: category
+> Required: category
 
 ##### Valid Parameters Values
 
@@ -115,7 +115,7 @@ Output
 
 ```json
 {  
-   "info":{  
+   "meta":{  
       "pageCurrent" : 1,
       "pageResult"  : 25,
       "pageTotal"   : 10
@@ -139,7 +139,7 @@ Output
 
 ToDo
 ====
-- [ ] Validate search function params
+- [ ] multiple tests for verification
 
 Licence
 ====

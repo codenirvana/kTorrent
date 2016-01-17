@@ -8,25 +8,19 @@ BASE_LINK = 'https://kat.cr/'
 EM_CONNECTION   = "Couldn't retrieve data"
 EM_INVALID      = "Invalid parameters passed"
 
-### Filters to verify passed parameters
-
-# KAT search result fields
-FIELD_FILTER = {
-    'size'  : 'size',
-    'files' : 'files_count',
-    'age'   : 'time_add',
-    'seed'  : 'seeders',
-    'leech' : 'leechers'
-}
-
-# Sorting order
-SORDER_FILTER = ['asc', 'desc']
-
-# Categories
-CATEGORY_FILTER = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'games', 'other', 'xxx']
-
-# Dictionary keys
-dict_keys = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
+class filter:
+    # Torrent result keys
+    KEYS = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
+    # Function args
+    FIELD = {
+        'size'  : 'size',
+        'files' : 'files_count',
+        'age'   : 'time_add',
+        'seed'  : 'seeders',
+        'leech' : 'leechers'
+    }
+    SORDER = ['asc', 'desc']
+    CATEGORY = ['all', 'movies', 'tv', 'anime', 'music', 'books', 'applications', 'games', 'other', 'xxx']
 
 def request(url):
 # generate request result
@@ -63,7 +57,7 @@ def request(url):
                 row_data.append(cols[i].text.strip())
 
             # Zip keys with values
-            row_data = zip( dict_keys, list( (x.replace(u'\xa0', u' ')) for x in row_data) )
+            row_data = zip( filter.KEYS , list( (x.replace(u'\xa0', u' ')) for x in row_data) )
 
             # Append current torrent to results
             result.append( dict( row_data ) )
@@ -80,7 +74,7 @@ def request(url):
             page = page[-2]
 
         data = {
-            'info' : {
+            'meta' : {
                 'pageCurrent' : int( page ),
                 'pageResult'  : rows_found,
                 'pageTotal'   : total_pages
@@ -96,14 +90,15 @@ def top(**args):
 # Top torrents category wise
 
     category = args.get('category')
-    page = args.get('page', '1')
+    page = args.get('page', 1)
 
-    # invalid category or page found
-    if category not in CATEGORY_FILTER or category == 'all' or (not page.isdigit()):
+    # Validating args
+    if  category not in filter.CATEGORY or category == 'all' \
+        or (not isinstance(page, int)):
         return EM_INVALID
 
     ### Generate Final Link ###
-    url = BASE_LINK + category + '/' + page
+    url = BASE_LINK + category + '/' + str(page)
 
     return request(url)
 
@@ -112,51 +107,47 @@ def search(**args):
 # Do a search
 
     search = args.get('search', '')
-    strict = args.get('strict', '0')
-    safe = args.get('safe', '0')
-    verified = args.get('verified', '0')
+    strict = args.get('strict', 0)
+    safe = args.get('safe', 0)
+    verified = args.get('verified', 0)
     subtract = args.get('subtract', '')
     user = args.get('user', '')
     category = args.get('category', 'all')
-    field = args.get('field', 'age')
+    field = args.get('field', 'seed')
     sorder = args.get('sorder', 'desc')
-    page = args.get('page', '1')
+    page = args.get('page', 1)
 
-    # no search query found
-    if search == '':
+    # Validating args
+    if  search == '' \
+        or strict not in range(-1,2) \
+        or safe not in range(0,2) \
+        or verified not in range(0,2) \
+        or category not in filter.CATEGORY \
+        or field not in filter.FIELD.keys() \
+        or sorder not in filter.SORDER \
+        or (not isinstance(page, int)):
         return EM_INVALID
 
     ### Generate Search Query ###
-    # Strictness
-    if strict == '-1':
+    if strict == -1:
         search_query = search.replace(" ", " OR ")
-    elif strict == '1':
+    elif strict == 1:
         search_query = '"' + search + '"'
     else:
         search_query = search
 
-    # Category
     search_query += ' category:' + category
 
-    # Safety
-    if safe == '1':
-        search_query += ' is_safe:1'
+    search_query += ' is_safe:1' if safe == 1 else ''
 
-    # Verified
-    if verified == '1':
-        search_query += ' verified:1'
+    search_query += ' verified:1' if verified == 1 else ''
 
-    # Subtract specified word(s)
+    search_query += ' user:' + user if user != '' else ''
+
     if subtract != '':
-        words = subtract.split()
-        for word in words:
-            search_query += ' -' + word
-
-    # Uploads by certain user
-    if user != '':
-        search_query += ' user:' + user
+        search_query += ' -' + ' -'.join(  subtract.split()  )
 
     ### Generate Final Link ###
-    url = BASE_LINK + 'usearch/' + search_query + '/' + page + '/?field=' + FIELD_FILTER[field] +'&sorder=' + sorder
+    url = BASE_LINK + 'usearch/' + search_query + '/' + str(page) + '/?field=' + filter.FIELD[field] +'&sorder=' + sorder
 
     return request(url)

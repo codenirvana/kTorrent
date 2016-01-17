@@ -16,7 +16,7 @@ class kTorrentTest(TestCase):
 
     def testTop(self):
         # top: Validate JSON
-        output = ktorrent.top(category='movies', page='2')
+        output = ktorrent.top(category='movies', page=2)
         self.assertEqual( type( json.loads(output) ) is dict , True)
 
 if __name__ == '__main__':
