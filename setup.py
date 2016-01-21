@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ktorrent',
-    version='0.4.2',
+    version='0.4.3',
     description='Fetches and parses data from Kickass Torrents.',
     license='MIT',
     author='Udit Vasu',
