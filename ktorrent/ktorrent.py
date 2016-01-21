@@ -47,8 +47,8 @@ def request(url):
             category = ( cols[0].select('[id^=cat_]') )[0].text
             # Check if verified
             verified = '0'    # False
-            if len(links) > 3:
-                if links[-4].get('title') == "Verified Torrent":
+            if len(links) >= 3:
+                if links[-3].get('title') == "Verified Torrent":
                     verified = '1'
 
             row_data = [ name, link, magnet, verified, category ]
