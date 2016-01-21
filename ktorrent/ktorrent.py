@@ -57,14 +57,14 @@ def request(url):
                 row_data.append(cols[i].text.strip())
 
             # Zip keys with values
-            row_data = zip( filter.KEYS , list( (x.replace(u'\xa0', u' ')) for x in row_data) )
+            row_data = dict( zip( filter.KEYS , list( (x.replace(u'\xa0', u' ')) for x in row_data) ) )
 
             # Append current torrent to results
-            result.append( dict( row_data ) )
+            result.append( row_data )
 
         # Calculate total pages
         pager =  soup.select('.pages a')
-        total_pages = 1 if len( pager ) == 0 else pager[ - 1 ].text
+        total_pages = 1 if len( pager ) == 0 else int( pager[ - 1 ].text )
 
         # find page number
         page = url.split('/')
