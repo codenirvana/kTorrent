@@ -4,11 +4,6 @@ import ktorrent, json
 
 class kTorrentTest(TestCase):
 
-    def testConnection(self):
-        # Check connection
-        output = ktorrent.search(search='linux')
-        self.failIfEqual(output,"Couldn't retrieve data")
-
     def testSearch(self):
         # search: Validate JSON
         output = ktorrent.search(search='linux')
@@ -21,12 +16,17 @@ class kTorrentTest(TestCase):
 
     def testInvalidArgs(self):
         # Check invalid args
-        output1 = ktorrent.search(search='Linux', strict=404, category='book')
-        output2 = ktorrent.search(category='books')
-        output3 = ktorrent.top(category='movies', page='2')
-        self.assertEqual(output1, "Invalid parameters passed")
-        self.assertEqual(output2, "Invalid parameters passed")
-        self.assertEqual(output3, "Invalid parameters passed")
+        output =ktorrent.search(search='Linux', strict=404, category='book')
+        status = output['status']
+        self.assertEqual(status, 400)
+
+        output = ktorrent.search(category='books')
+        status = output['status']
+        self.assertEqual(status, 400)
+
+        output = ktorrent.top(category='movies', page='2')
+        status = output['status']
+        self.assertEqual(status, 400)
 
 if __name__ == '__main__':
     unittest.main()

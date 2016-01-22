@@ -4,10 +4,13 @@ from bs4 import BeautifulSoup
 # Base search link
 BASE_LINK = 'https://kat.cr/'
 
-# Error Messages
-EM_CONNECTION   = "Couldn't retrieve data"
-EM_INVALID      = "Invalid parameters passed"
+# Result status
+class status:
+    BADREQUEST = {'status' : 400}
+    NOTFOUND = {'status' : 404}
+    TIMEOUT = {'status' : 408}
 
+# Keys and Args Filter
 class filter:
     # Torrent result keys
     KEYS = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
@@ -28,7 +31,7 @@ def request(url):
     try:
         response = requests.get(url)
     except:
-        return EM_CONNECTION
+        return status.TIMEOUT
 
     soup = BeautifulSoup(response.text,"html.parser")
     rows = soup.select('[id^=torrent_]')
@@ -74,6 +77,7 @@ def request(url):
             page = page[-2]
 
         data = {
+            'status' : 200,
             'meta' : {
                 'pageCurrent' : int( page ),
                 'pageResult'  : rows_found,
@@ -82,7 +86,7 @@ def request(url):
             'torrent' : result
         }
     else:
-        data = "Nothing found"
+        data = status.NOTFOUND
 
     return json.dumps(data,sort_keys=True)
 
@@ -95,7 +99,7 @@ def top(**args):
     # Validating args
     if  category not in filter.CATEGORY or category == 'all' \
         or (not isinstance(page, int)):
-        return EM_INVALID
+        return status.BADREQUEST
 
     ### Generate Final Link ###
     url = BASE_LINK + category + '/' + str(page)
@@ -126,7 +130,7 @@ def search(**args):
         or field not in filter.FIELD.keys() \
         or sorder not in filter.SORDER \
         or (not isinstance(page, int)):
-        return EM_INVALID
+        return status.BADREQUEST
 
     ### Generate Search Query ###
     if strict == -1:

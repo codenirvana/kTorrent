@@ -115,6 +115,7 @@ Output
 
 ```json
 {  
+   "status" : 200,
    "meta":{  
       "pageCurrent" : 1,
       "pageResult"  : 25,
