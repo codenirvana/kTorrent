@@ -86,7 +86,7 @@ def request(url):
             'torrent' : result
         }
     else:
-        data = status.NOTFOUND
+        return status.NOTFOUND
 
     return json.dumps(data,sort_keys=True)
 
