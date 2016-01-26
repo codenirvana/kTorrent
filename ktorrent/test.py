@@ -16,17 +16,14 @@ class kTorrentTest(TestCase):
 
     def testInvalidArgs(self):
         # Check invalid args
-        output =ktorrent.search(search='Linux', strict=404, category='book')
-        status = output['status']
-        self.assertEqual(status, 400)
+        output = json.loads( ktorrent.search(search='Linux', strict=404, category='book') )
+        self.assertEqual(output['status'], 400)
 
-        output = ktorrent.search(category='books')
-        status = output['status']
-        self.assertEqual(status, 400)
+        output = json.loads( ktorrent.search(category='books') )
+        self.assertEqual(output['status'], 400)
 
-        output = ktorrent.top(category='movies', page='2')
-        status = output['status']
-        self.assertEqual(status, 400)
+        output = json.loads( ktorrent.top(category='movies', page='2') )
+        self.assertEqual(output['status'], 400)
 
 if __name__ == '__main__':
     unittest.main()

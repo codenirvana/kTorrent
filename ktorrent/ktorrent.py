@@ -6,9 +6,9 @@ BASE_LINK = 'https://kat.cr/'
 
 # Result status
 class status:
-    BADREQUEST = {'status' : 400}
-    NOTFOUND = {'status' : 404}
-    TIMEOUT = {'status' : 408}
+    BADREQUEST  = '{"status" : 400}'
+    NOTFOUND    = '{"status" : 404}'
+    TIMEOUT     = '{"status" : 408}'
 
 # Keys and Args Filter
 class filter:
