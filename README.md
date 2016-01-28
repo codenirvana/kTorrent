@@ -138,9 +138,16 @@ Output
 }
 ```
 
+ status | Description
+------- | ------
+**200** | SUCCESS
+**400** | BAD REQUEST *invalid function parameters*
+**404** | NOT FOUND
+**408** | TIME OUT *server error*
+
 ToDo
 ====
-- [ ] multiple tests for verification
+- [x] multiple tests for verification
 
 Licence
 ====
