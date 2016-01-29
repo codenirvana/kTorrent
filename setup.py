@@ -1,12 +1,10 @@
 from setuptools import setup
 
-long_description = open('README.rst').read()
-
 setup(
     name='ktorrent',
     version='0.4.6',
     description='Fetches and parses data from Kickass Torrents.',
-    long_description=long_description,
+    long_description=open('README.rst').read(),
     license='MIT',
     author='Udit Vasu',
     author_email='admin@codenirvana.in',
