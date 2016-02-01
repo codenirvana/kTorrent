@@ -2,7 +2,7 @@ import requests, json, __future__
 from bs4 import BeautifulSoup
 
 # Base search link
-BASE_LINK = 'https://kat.cr/'
+BASE_LINK = 'https://kat.cr'
 
 # Result status
 class status:
@@ -13,7 +13,7 @@ class status:
 # Keys and Args Filter
 class filter:
     # Torrent result keys
-    KEYS = ['name', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
+    KEYS = ['name', 'web', 'link', 'magnet', 'verified', 'category', 'size', 'files', 'age', 'seed', 'leech']
     # Function args
     FIELD = {
         'size'  : 'size',
@@ -45,6 +45,7 @@ def request(url):
 
             # Extracting Torrent information
             name = ( cols[0].select('.cellMainLink') )[0].text
+            web = BASE_LINK + ( cols[0].select('.cellMainLink') )[0].get('href')
             link = 'http:' + links[-1].get('href')
             magnet = links[-2].get('href')
             category = ( cols[0].select('[id^=cat_]') )[0].text
@@ -54,7 +55,7 @@ def request(url):
                 if links[-3].get('title') == "Verified Torrent":
                     verified = '1'
 
-            row_data = [ name, link, magnet, verified, category ]
+            row_data = [ name, web, link, magnet, verified, category ]
 
             for i in range(1,6):
                 row_data.append(cols[i].text.strip())
@@ -102,7 +103,7 @@ def top(**args):
         return status.BADREQUEST
 
     ### Generate Final Link ###
-    url = BASE_LINK + category + '/' + str(page)
+    url = BASE_LINK + '/' + category + '/' + str(page)
 
     return request(url)
 
@@ -152,6 +153,6 @@ def search(**args):
         search_query += ' -' + ' -'.join(  subtract.split()  )
 
     ### Generate Final Link ###
-    url = BASE_LINK + 'usearch/' + search_query + '/' + str(page) + '/?field=' + filter.FIELD[field] +'&sorder=' + sorder
+    url = BASE_LINK + '/usearch/' + search_query + '/' + str(page) + '/?field=' + filter.FIELD[field] +'&sorder=' + sorder
 
     return request(url)

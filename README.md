@@ -132,7 +132,8 @@ Output
          "name"     : "",
          "seed"     : "",
          "size"     : "",
-         "verified" : ""
+         "verified" : "",
+         "web"      : ""
       }
     ]
 }
@@ -148,6 +149,7 @@ Output
 ToDo
 ====
 - [x] multiple tests for verification
+- [x] web link in result
 
 Licence
 ====
