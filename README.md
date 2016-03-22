@@ -10,7 +10,7 @@ A Python module to fetch and parse data from Kickass Torrents.
 Install
 =====
 
-### Using `pip`
+### Using pip
 
 ```bash
 $ pip install ktorrent
