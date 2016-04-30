@@ -146,11 +146,6 @@ Output
 **404** | NOT FOUND
 **408** | TIME OUT *server error*
 
-ToDo
-====
-- [x] multiple tests for verification
-- [x] web link in result
-
 Licence
 ====
 Open sourced under [MIT License](LICENSE)
