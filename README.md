@@ -1,4 +1,4 @@
-:warning:  [`On 20 July 2016, KAT domain was seized by the United States government and is offline.`](http://www.theverge.com/2016/7/20/12243592/kickass-torrents-artem-vaulin-founder-arrested-domains-seized)
+:warning:  `On 20 July 2016, KAT domain was seized by the United States government and is offline.`
 
 kTorrent
 =====
