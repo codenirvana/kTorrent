@@ -12,7 +12,7 @@ setup(
     packages=['ktorrent'],
     install_requires=[
         "beautifulsoup4==4.4.1",
-        "requests==2.8.1"
+        "requests==2.20.0"
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
